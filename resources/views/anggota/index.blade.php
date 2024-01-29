@@ -6,30 +6,17 @@
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <div class="page-title-left">
-                            <h4 class="mb-sm-0 font-size-18">List User</h4>
+                            <h4 class="mb-sm-0 font-size-18">{{ $label }}</h4>
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item">User</li>
-                                <li class="breadcrumb-item">List Data User</li>
+                                <li class="breadcrumb-item">{{ ucwords($menu) }}</li>
                             </ol>
                         </div>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                @if (Auth::user()->roles == 'Administrator')
-                                    {{-- <a href="{{ route('pengguna.tambah_siswa_listuser') }}" type="button"
+                                @if (Auth::user()->id == 1)
+                                    <a href="{{ route('anggota.create') }}" type="button"
                                         class="float-end btn btn-success btn-rounded waves-effect waves-light mb-2 me-2">
-                                        <i class="mdi mdi-plus me-1"></i> Siswa
-                                    </a>
-                                    <a href="{{ route('pengguna.tambah_guru_listuser') }}" type="button"
-                                        class="float-end btn btn-success btn-rounded waves-effect waves-light mb-2 me-2">
-                                        <i class="mdi mdi-plus me-1"></i>Guru
-                                    </a>
-                                    <a href="{{ route('pembina_list.create') }}" type="button"
-                                        class="float-end btn btn-success btn-rounded waves-effect waves-light mb-2 me-2">
-                                        <i class="mdi mdi-plus me-1"></i>Pembina
-                                    </a> --}}
-                                    <a href="{{ route('pengguna.tambah_admin_listuser') }}" type="button"
-                                        class="float-end btn btn-success btn-rounded waves-effect waves-light mb-2 me-2">
-                                        <i class="mdi mdi-plus me-1"></i> User  
+                                        <i class="mdi mdi-plus me-1"></i> Tambah
                                     </a>
                                 @endif
                             </ol>
@@ -37,38 +24,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs nav-tabs-custom nav-justified" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-bs-toggle="tab" href="#siswa" role="tab">
-                                        Data Siswa
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('list_data_guru') }}">
-                                        Data Guru
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('pembina_list.index') }}">
-                                        Pembina
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('list_data_administrator') }}">
-                                        Administrator
-                                    </a>
-                                </li>
-                            </ul>
-                            <br>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -88,8 +43,8 @@
                                     </h2>
 
                                     <div id="collapseOne" class="accordion-collapse collapse <?php
-                                    if (isset($_GET['name']) or isset($_GET['class_name']) or isset($_GET['nis']) or isset($_GET['roles'])) {
-                                        if ($_GET['name'] != null or $_GET['class_name'] != null or $_GET['nis'] != null or $_GET['roles'] != null) {
+                                    if (isset($_GET['name']) or isset($_GET['email']) or isset($_GET['nis']) or isset($_GET['address']) or isset($_GET['phone']) or isset($_GET['roles'])) {
+                                        if ($_GET['name'] != null or $_GET['email'] != null or $_GET['nis'] != null or $_GET['address'] != null or $_GET['phone'] != null or $_GET['roles'] != null) {
                                             echo 'show';
                                         }
                                     }
@@ -112,9 +67,9 @@
                                                                         autocomplete="off">
                                                                 </div>
                                                                 <div class="col-sm-2 mb-2">
-                                                                    <input type="text" name="class_name" id="class_name"
-                                                                        value="{{ isset($_GET['class_name']) ? $_GET['class_name'] : null }}"
-                                                                        class="form-control" placeholder="Kelas"
+                                                                    <input type="text" name="email" id="email"
+                                                                        value="{{ isset($_GET['email']) ? $_GET['email'] : null }}"
+                                                                        class="form-control" placeholder="Email"
                                                                         autocomplete="off">
                                                                 </div>
                                                                 <div class="col-sm-2 mb-2">
@@ -123,6 +78,19 @@
                                                                         class="form-control" placeholder="Nis"
                                                                         autocomplete="off">
                                                                 </div>
+                                                                <div class="col-sm-2 mb-2">
+                                                                    <input type="text" name="address" id="address"
+                                                                        value="{{ isset($_GET['address']) ? $_GET['address'] : null }}"
+                                                                        class="form-control" placeholder="Alamat"
+                                                                        autocomplete="off">
+                                                                </div>
+                                                                <div class="col-sm-2 mb-2">
+                                                                    <input type="text" name="phone" id="phone"
+                                                                        value="{{ isset($_GET['phone']) ? $_GET['phone'] : null }}"
+                                                                        class="form-control" placeholder="Phone"
+                                                                        autocomplete="off">
+                                                                </div>
+
                                                                 <div class="col-sm-2 mb-2">
                                                                     <input type="text" name="roles" id="roles"
                                                                         value="{{ isset($_GET['roles']) ? $_GET['roles'] : null }}"
@@ -157,14 +125,17 @@
                                                         <div class="col-sm-10 mb-2">
                                                             <button type="submit"
                                                                 class="btn btn-primary w-md">Cari</button>
-                                                            <a href="{{ route('pengguna.alluser') }}"
+                                                            <a href="{{ route('pembina.index') }}"
                                                                 class="btn btn-secondary w-md">Batal</a>
                                                             @if (isset($_GET['name']) or isset($_GET['like']))
                                                                 <?php
                                                                 $name = $_GET['name'];
-                                                                $class_name = $_GET['class_name'];
+                                                                $email = $_GET['email'];
                                                                 $nis = $_GET['nis'];
+                                                                $address = $_GET['address'];
+                                                                $phone = $_GET['phone'];
                                                                 $roles = $_GET['roles'];
+                                                                // $name = $_GET['name'];
                                                                 $search_manual = $_GET['search_manual'];
                                                                 if (isset($_GET['like'])) {
                                                                     $like = $_GET['like'];
@@ -187,9 +158,8 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
-                                        <th>Kelas</th>
-                                        <th>Nis</th>
-                                        <th>Roles</th>
+                                        <th>Jabatan</th>
+                                        <th>Piket</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -209,11 +179,11 @@
             like = document.getElementById("like").checked;
             if (like == true) {
                 document.getElementById("name").value = null;
-                document.getElementById("class_name").value = null;
+                document.getElementById("email").value = null;
                 document.getElementById("nis").value = null;
+                document.getElementById("address").value = null;
+                document.getElementById("phone").value = null;
                 document.getElementById("roles").value = null;
-                // document.getElementById("address").value = null;
-                // document.getElementById("phone").value = null;
                 // document.getElementById("name").value = null;
                 $('#type').val("").trigger('change')
                 document.getElementById("id_where").style.display = 'none';
@@ -230,10 +200,11 @@
             like = document.getElementById("like").checked;
             if (like == true) {
                 document.getElementById("name").value = null;
-                document.getElementById("class_name").value = null;
+                document.getElementById("email").value = null;
                 document.getElementById("nis").value = null;
+                document.getElementById("address").value = null;
+                document.getElementById("phone").value = null;
                 document.getElementById("roles").value = null;
-                // document.getElementById("name").value = null;
                 $('#type').val("").trigger('change')
                 document.getElementById("id_where").style.display = 'none';
                 document.getElementById("id_like").style.display = 'block';
@@ -252,21 +223,29 @@
                 serverSide: true,
                 responsive: true,
                 ajax: {
-                    url: "{{ route('pengguna.get_list_user_siswa') }}",
+                    url: "{{ route('anggota.list_data_anggota') }}",
                     data: function(d) {
                         d.name = (document.getElementById("name").value
                                 .length != 0) ?
                             document
                             .getElementById(
                                 "name").value : null;
-                        d.class_name = (document.getElementById("class_name").value.length != 0) ?
+                        d.email = (document.getElementById("email").value.length != 0) ?
                             document
                             .getElementById(
-                                "class_name").value : null;
+                                "email").value : null;
                         d.nis = (document.getElementById("nis").value.length != 0) ?
                             document
                             .getElementById(
                                 "nis").value : null;
+                        d.address = (document.getElementById("address").value.length != 0) ?
+                            document
+                            .getElementById(
+                                "address").value : null;
+                        d.phone = (document.getElementById("phone").value.length != 0) ?
+                            document
+                            .getElementById(
+                                "phone").value : null;
                         d.roles = (document.getElementById("roles").value.length != 0) ?
                             document
                             .getElementById(
@@ -289,21 +268,18 @@
 
                     },
                     {
-                        data: 'name',
+                        data: 'nama',
                         name: 'name'
                     },
                     {
-                        data: 'class',
-                        name: 'class'
+                        data: 'jabatan',
+                        name: 'jabatan'
                     },
                     {
-                        data: 'nis',
-                        name: 'nis'
+                        data: 'piket',
+                        name: 'piket'
                     },
-                    {
-                        data: 'roles',
-                        name: 'roles'
-                    },
+                   
                     {
                         data: 'action',
                         name: 'action',
@@ -314,71 +290,5 @@
             });
 
         });
-
-
-        function showResetForm(id) {
-            Swal.fire({
-                title: 'Konfirmasi Reset Password',
-                text: "Anda yakin ingin mereset password siswa ini?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Ya, Reset!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Menampilkan formulir reset password
-                    const formHtml = `
-                    <form id="reset-form-${id}">
-                        @csrf
-                        <input type="hidden" name="student_id" value="${id}">
-                        <input type="password" name="new_password" placeholder="Password baru" required>
-                        <button type="submit">Reset Password</button>
-                    </form>
-                `;
-
-                    Swal.fire({
-                        title: 'Reset Password',
-                        html: formHtml,
-                        showCancelButton: false,
-                        showConfirmButton: false,
-                        allowOutsideClick: false
-                    });
-
-                    // Submit form saat diisi
-                    const resetForm = document.getElementById(`reset-form-${id}`);
-                    resetForm.addEventListener('submit', (event) => {
-                        event.preventDefault();
-                        resetPassword(id, resetForm.new_password.value);
-                    });
-                }
-            });
-        }
-
-        function resetPassword(id, newPassword) {
-            // Kirim permintaan AJAX untuk mereset password
-            axios.post(`/reset-password/${id}`, {
-                    new_password: newPassword
-                })
-                .then(response => {
-                    Swal.fire(
-                        'Berhasil!',
-                        'Password siswa berhasil di-reset.',
-                        'success'
-                    ).then(() => {
-                        // Refresh halaman atau lakukan tindakan lain yang sesuai
-                        location.reload();
-                    });
-                })
-                .catch(error => {
-                    console.error(error);
-                    Swal.fire(
-                        'Gagal!',
-                        'Terjadi kesalahan saat mereset password.',
-                        'error'
-                    );
-                });
-        }
     </script>
 @endsection

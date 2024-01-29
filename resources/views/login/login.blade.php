@@ -26,7 +26,7 @@
                                     <div class="text-primary" style="padding: 15px 0px 0px 25px;">
                                         <h5 class="text-primary">Welcome Back !</h5>
                                         Sign in to
-                                        <p>System Information E-Votting.</p>
+                                        <p>Information Absensi Damkar.</p>
                                     </div>
                                 </div>
                                 <div class="col-5 align-self-end">
@@ -40,7 +40,7 @@
                                 <a href="#" class="auth-logo-dark">
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <span class="avatar-title rounded-circle bg-light">
-                                            <img src="{{ URL::asset('assets/images/brands/logo123.png') }}"
+                                            <img src="{{ URL::asset('assets/images/redkar.png') }}"
                                                 alt="" class="rounded-circle" height="54">
                                         </span>
                                     </div>
@@ -79,14 +79,14 @@
                                     novalidate>
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="validationCustom02" class="form-label">Username</label>
-                                        <input type="text" class="form-control" name="nis" id="nis"
-                                            placeholder="Nis / Nik" autocomplete="off" autofocus
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+                                        <label for="validationCustom02" class="form-label">Email</label>
+                                        <input type="text" class="form-control" name="email" id="email"
+                                            placeholder="Email" autocomplete="off" autofocus
+                                           required>
                                         <div class="invalid-feedback">
-                                            Mohon masukan NIK atau NISN anda!
+                                            Mohon masukan Email anda!
                                         </div>
-                                        {{-- {!! $errors->first('nis', '<div class="invalid-validasi" style="color:red">:message</div>') !!} --}}
+                                        {{-- {!! $errors->first('email', '<div class="invalid-validasi" style="color:red">:message</div>') !!} --}}
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Password</label>
@@ -114,7 +114,7 @@
                         <div>
                             <script>
                                 document.write(new Date().getFullYear())
-                            </script> | SMA Negeri 1 Kota Gajah
+                            </script> | Absensi Damkar
                             </p>
                         </div>
                     </div>

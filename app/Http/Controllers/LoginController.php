@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    protected $title = 'E-Votting';
+    protected $title = 'Damkar E-Absensi';
     protected $menu = 'login';
     /**
      * Display a listing of the resource.
@@ -31,7 +31,7 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'nis' => 'required',
+            'email' => 'required',
             'password' => 'required',
             'aktif' => '0',
         ]);
@@ -41,10 +41,10 @@ class LoginController extends Controller
             if (Auth::user()->roles == 'Administrator') {
                 $request->session()->regenerate();
                 return redirect()->intended('dashboard');
-            } else if (Auth::user()->roles == 'guru') {
+            } else if (Auth::user()->roles == 'Kelompok') {
                 $request->session()->regenerate();
                 return redirect()->intended('dashboard');
-            } else if (Auth::user()->roles == 'siswa') {
+            } else if (Auth::user()->roles == 'Apel') {
                 $request->session()->regenerate();
                 return redirect()->intended('dashboard');
             } else {
@@ -65,7 +65,7 @@ class LoginController extends Controller
             'submenu' => 'recovery',
             'type' => 'recovery',
             'subject' => 'Reset Password',
-            'p' => 'E-Votting',
+            'p' => 'E-Absensi',
             'submit' => 'Reset',
         ];
         return view('login.recovery')->with($data);
@@ -79,7 +79,7 @@ class LoginController extends Controller
             'submenu' => 'reverify',
             'type' => 'reverify',
             'subject' => 'Reverify Email',
-            'p' => 'E-Votting',
+            'p' => 'E-Absensi',
             'submit' => 'Reverify',
         ];
         return view('login.recovery')->with($data);

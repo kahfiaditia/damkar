@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AbsenMandiriController;
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\BarcodeAbsensiController;
 use App\Http\Controllers\ClasessController;
 use App\Http\Controllers\DaftarMandiriController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\PembinaController;
 use App\Http\Controllers\PengikutController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\PeriodeController;
+use App\Http\Controllers\PiketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPembinaController;
 
@@ -32,9 +34,9 @@ use App\Http\Controllers\UserPembinaController;
 |
 */
 
-Route::get('/', [FrontendController::class, 'grafik'])->name('awal');
-Route::get('/grafik', [FrontendController::class, 'grafik'])->name('grafik');
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+// Route::get('/', [FrontendController::class, 'grafik'])->name('awal');
+// Route::get('/grafik', [FrontendController::class, 'grafik'])->name('grafik');
+Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::get('/recovery', [LoginController::class, 'recovery'])->name('recovery');
 Route::post('/logout', [LoginController::class, 'logout'])->name('login.logout');
 
@@ -110,7 +112,7 @@ Route::group(
         Route::get('/data_kelas', [ClasessController::class, 'data_kelas'])->name('class.data_kelas');
         Route::resource('/periode', PeriodeController::class);
         Route::get('/data_periode', [PeriodeController::class, 'data_periode'])->name('periode.data_periode');
-        Route::resource('/kandidats', KandidatsController::class);
+        Route::resource('/kandidats', KandidatController::class);
         Route::resource('/kandidat', KandidatController::class);
         Route::get('/data_kandidat', [KandidatController::class, 'data_kandidat'])->name('kandidat.data_kandidat');
         Route::post('/get_calonketua', [KandidatController::class, 'get_calonketua'])->name('kandidat.get_calonketua');
@@ -152,5 +154,11 @@ Route::group(
         Route::post('/data_absen', [ListAbsenController::class, 'data_absen'])->name('data_list_absen.data_absen');
         Route::resource('/absen_mandiri', AbsenMandiriController::class);
         Route::post('/data_hadir', [AbsenMandiriController::class, 'data_hadir'])->name('absen_mandiri.data_hadir');
+
+        //damkar
+        Route::resource('/piket', PiketController::class);
+        Route::resource('/anggota', AnggotaController::class);
+        Route::post('/get_grup_data', [AnggotaController::class, 'get_grup_data'])->name('anggota.get_grup_data');
+        Route::get('/list_data_anggota', [AnggotaController::class, 'list_data_anggota'])->name('anggota.list_data_anggota');
     }
 );

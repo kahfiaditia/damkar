@@ -21,7 +21,7 @@ class AkunSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         $user = [
             [
-                'name' => 'Riki',
+                'name' => 'Amin Prabowo Mahfud',
                 'email' => 'administrator@gmail.com',
                 'password' => bcrypt('12345'),
                 'roles' => 'Administrator',
@@ -32,10 +32,10 @@ class AkunSeeder extends Seeder
                 'email_verified_at' => Carbon::now(),
             ],
             [
-                'name' => 'Olivia Ajeng',
-                'email' => 'riki@gmail.com',
+                'name' => 'Imin Mahfud Gibran',
+                'email' => 'kelompok@gmail.com',
                 'password' => bcrypt('12345'),
-                'roles' => 'guru',
+                'roles' => 'Kelompok',
                 'nis' => '89565555',
                 'pin' => 1234,
                 'address' => 'Jalan Hutan Kayu',
@@ -46,7 +46,7 @@ class AkunSeeder extends Seeder
                 'name' => 'Tania',
                 'email' => 'tania@gmail.com',
                 'password' => bcrypt('12345'),
-                'roles' => 'guru',
+                'roles' => 'Apel',
                 'nis' => '895675789',
                 'pin' => 1234,
                 'address' => 'Jalan Jaksa 7',
