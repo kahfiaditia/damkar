@@ -1,3 +1,22 @@
+#Cara Menjalankan:<br>
+ketik pada terminal:<br>
+Composer update atau composer install atau composer install --ignore-platform-reqs<br>
+cp .env.example .env<br>
+ganti nama database di env<br>
+buat database di localhost<br>
+php artisan migrate --seed<br>
+php artisan key:generate<br>
+php artisan serve<br>
+
+#Jalankan Seeder di terminal dengan Command sebagai berikut:<br>
+php artisan db:seed --class=AkunSedder<br>
+php artisan db:seed --class=HariSedder<br>
+
+#login:<br>
+administrator@gmail.com // 12345<br>
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
