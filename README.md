@@ -1,19 +1,19 @@
 #Cara Menjalankan:<br>
-ketik pada terminal:
-Composer update atau composer install atau composer install --ignore-platform-reqs
-cp .env.example .env
-ganti nama database di env
-buat database di localhost
-php artisan migrate --seed
-php artisan key:generate
-php artisan serve
+ketik pada terminal:<br>
+Composer update atau composer install atau composer install --ignore-platform-reqs<br>
+cp .env.example .env<br>
+ganti nama database di env<br>
+buat database di localhost<br>
+php artisan migrate --seed<br>
+php artisan key:generate<br>
+php artisan serve<br>
 
-#Jalankan Seeder di terminal dengan Command sebagai berikut:
-php artisan db:seed --class=AkunSedder
-php artisan db:seed --class=HariSedder
+#Jalankan Seeder di terminal dengan Command sebagai berikut:<br>
+php artisan db:seed --class=AkunSedder<br>
+php artisan db:seed --class=HariSedder<br>
 
-#login:
-administrator@gmail.com // 12345
+#login:<br>
+administrator@gmail.com // 12345<br>
 
 
 
