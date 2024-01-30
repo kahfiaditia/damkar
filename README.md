@@ -1,4 +1,4 @@
-#Cara Menjalankan:
+#Cara Menjalankan:<br>
 ketik pada terminal:
 Composer update atau composer install atau composer install --ignore-platform-reqs
 cp .env.example .env
