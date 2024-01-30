@@ -88,7 +88,7 @@ class AnggotaController extends Controller
         }
 
         return DataTables::of($userdata)
-            ->addColumn('action', 'pembina.a')
+            ->addColumn('action', 'anggota.aksi')
             ->rawColumns(['action'])
             ->make(true);
     }

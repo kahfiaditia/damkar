@@ -38,7 +38,7 @@
                                             data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
                                             aria-controls="collapseOne">
                                             <i class="bx bx-search-alt font-size-18"></i>
-                                            <b>Cari & Unduh Data</b>
+                                            <b>Cari Data</b>
                                         </button>
                                     </h2>
 
@@ -81,7 +81,7 @@
                                                                 <div class="col-sm-2 mb-2">
                                                                     <input type="text" name="piket" id="piket"
                                                                         value="{{ isset($_GET['piket']) ? $_GET['piket'] : null }}"
-                                                                        class="form-control" placeholder="piket"
+                                                                        class="form-control" placeholder="Piket"
                                                                         autocomplete="off">
                                                                 </div>
                                                             </div>

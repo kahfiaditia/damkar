@@ -59,7 +59,7 @@
                                             </td>
                                             <td>
                                                 <?php $id = $item->id; ?>
-                                                <form class="delete-form" action="" method="POST">
+                                                <form class="delete-form" action="{{ route('piket.destroy', $id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <div class="d-flex gap-3">

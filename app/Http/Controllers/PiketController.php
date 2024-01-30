@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Helper\AlertHelper;
+use App\Models\AnggotaModel;
 use App\Models\PiketModel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
@@ -72,6 +75,7 @@ class PiketController extends Controller
             $piket->kode = $request->kode;
             $piket->deskripsi = $request->deskripsi;
             $piket->status = 1;
+            $piket->user_created = Auth::user()->id;
             $piket->save();
 
             DB::commit();
@@ -132,11 +136,12 @@ class PiketController extends Controller
 
             $status = $request->has('status') ? 1 : 2;
 
-            $pembina = PiketModel::findOrFail($id);
-            $pembina->kode = $request->kode;
-            $pembina->deskripsi = $request->deskripsi;
-            $pembina->status = $status;
-            $pembina->save();
+            $update = PiketModel::findOrFail($id);
+            $update->kode = $request->kode;
+            $update->deskripsi = $request->deskripsi;
+            $update->status = $status;
+            $update->user_updated = Auth::user()->id;
+            $update->save();
 
             DB::commit();
             AlertHelper::addAlert(true);
@@ -157,6 +162,22 @@ class PiketController extends Controller
      */
     public function destroy($id)
     {
-        //
+                  
+            DB::beginTransaction();
+            try {
+                $delete = PiketModel::findorfail($id);
+                $delete->user_deleted = Auth::user()->id;
+                $delete->deleted_at = Carbon::now();
+                $delete->save();
+
+                DB::commit();
+                AlertHelper::deleteAlert(true);
+                return back();
+            } catch (\Throwable $err) {
+                DB::rollBack();
+                AlertHelper::deleteAlert(false);
+                return back();
+            }
+        
     }
 }
