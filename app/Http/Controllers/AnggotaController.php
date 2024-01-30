@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\AlertHelper;
 use App\Models\AnggotaModel;
+use App\Models\PiketModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -183,7 +184,16 @@ class AnggotaController extends Controller
      */
     public function edit($id)
     {
-        //
+        dd($id);
+        $data = [
+            'title' => $this->title,
+            'menu' => $this->menu,
+            'label' => 'Data Anggota Edit',
+            'editdata' => AnggotaModel::findOrFail($id),
+            'datapiket' => PiketModel::all()
+        ];
+
+        return view('anggota.edit')->with($data);
     }
 
     /**
@@ -195,7 +205,7 @@ class AnggotaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -207,5 +217,36 @@ class AnggotaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function  simpanData(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+
+            $id = $request->id;
+
+         
+            $editanggota = AnggotaModel::findOrFail($id);
+            $editanggota->nama = $request->nama;
+            $editanggota->jabatan = $request->jabatan;
+            $editanggota->piket = $request->piket_id;
+            $editanggota->status = 1;
+            $editanggota->user_created = Auth::user()->id;
+            $editanggota->save();
+
+            DB::commit();
+            return response()->json([
+                'code' => 200,
+                'message' => 'Berhasil Input Data',
+            ]);
+        } catch (\Throwable $err) {
+            DB::rollBack();
+            throw $err;
+            return response()->json([
+                'code' => 404,
+                'message' => 'Gagal Input Data',
+            ]);
+        }
     }
 }

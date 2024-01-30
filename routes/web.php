@@ -54,7 +54,10 @@ Route::group(
         Route::resource('/anggota', AnggotaController::class);
         Route::post('/get_grup_data', [AnggotaController::class, 'get_grup_data'])->name('anggota.get_grup_data');
         Route::get('/list_data_anggota', [AnggotaController::class, 'list_data_anggota'])->name('anggota.list_data_anggota');
+        Route::post('/simpan-data',  [AnggotaController::class, 'list_data_anggota'])->name('anggota.simpanData');
         Route::resource('/jadwal_piket', JadwalPiketController::class);
+        Route::get('/get_hari', [JadwalPiketController::class, 'getHari'])->name('jadwal_piket.get_hari');
+        Route::post('/cari_hari', [JadwalPiketController::class, 'cari_hari'])->name('jadwal_piket.cari_hari');
         Route::post('/ketua_kelompok', [JadwalPiketController::class, 'ketua_kelompok'])->name('jadwal_piket.ketua_kelompok');
         Route::post('/simpan_data_piket', [JadwalPiketController::class, 'simpan_data_piket'])->name('jadwal_piket.simpan_data_piket');
         Route::resource('/absensi_piket', AbsenPiketController::class);

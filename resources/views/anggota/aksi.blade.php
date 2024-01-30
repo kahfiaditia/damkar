@@ -1,10 +1,8 @@
 <?php $id = $model->id; ?>
-<?php $id_decrypted = Crypt::encryptString($id); ?>
-<form class="delete-form" action="{{ route('anggota.destroy', $id_decrypted) }}" method="POST">
+<form class="delete-form" action="{{ route('anggota.destroy', $id) }}" method="POST">
     @csrf
     @method('DELETE')
     <div class="d-flex gap-3">
-       
             <a href="{{ route('anggota.edit', $id) }}" class="text-success"><i
                     class="mdi mdi-pencil font-size-18"></i></a>
             <a href class="text-danger delete_confirm"><i class="mdi mdi-delete font-size-18"></i></a>

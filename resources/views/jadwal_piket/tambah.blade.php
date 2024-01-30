@@ -105,7 +105,7 @@
                                         </div>
                                         <div class="row mt-4">
                                             <div class="col-sm-12">
-                                                <a href="{{ route('jadwal.index') }}"
+                                                <a href="{{ route('jadwal_piket.index') }}"
                                                     class="btn btn-secondary waves-effect">Batal</a>
                                                 <button class="btn btn-primary" type="button" style="float: right"
                                                     id="simpanDataBtn">Simpan</button>
@@ -157,7 +157,7 @@
                 function isiPilihanHari() {
                     $.ajax({
                         type: "GET",
-                        url: '{{ route('jadwal.get_hari') }}',
+                        url: '{{ route('jadwal_piket.get_hari') }}',
                         dataType: "json",
                         success: function(response) {
                             var select = $("#hari");
@@ -226,7 +226,7 @@
                 // Mengambil data hari dari server dengan AJAX
                 $.ajax({
                     type: "POST",
-                    url: '{{ route('jadwal.cari_hari') }}',
+                    url: '{{ route('jadwal_piket.cari_hari') }}',
                     data: {
                         "_token": "{{ csrf_token() }}",
                     },
