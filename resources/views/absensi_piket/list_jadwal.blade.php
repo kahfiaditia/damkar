@@ -26,8 +26,9 @@
                     <div class="">
                         <div class="table-responsive">
                             <div class="">
-                                <div class="alert alert-warning mb-0" role="alert" style="font-size: 18px;">
-                                    Data absensi akan tampil sesuai jadwal yang telah di input pada menu Jadwal, Misal Diinput Hari Senin, Maka akan Tampil hanya Hari Senin
+                                <div class="alert alert-warning mb-0" role="alert" style="font-size: 16px;">
+                                    Data absensi akan tampil sesuai jadwal yang telah di input pada menu Jadwal,<br>
+                                     Misal Diinput Hari Senin, Maka akan Tampil hanya Hari Senin
                                 </div>
                             </div>
                             <table class="table project-list-table table-nowrap align-middle table-borderless">
