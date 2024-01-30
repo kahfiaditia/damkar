@@ -110,89 +110,101 @@
     <script script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/alert.js') }}"></script>
     <script>
-    $(document).ready(function() {
-        // Get additional data
-        var grupPiketId = $('#grup_piket_id').val();
-        var grupPiket = $('#grup_piket').val();
-        var ketuaKelompok = $('#ketua_kelompok').val();
-        var ketuaKelompokid = $('#ketua_kelompok_id').val();
-        var namaHari = $('#nama_hari').val();
-        var idHari = $('#id_hari').val();
-        var jumlahAnggota = $('#jumlah').val();
+        $(document).ready(function() {
+            // Get additional data
+            var grupPiketId = $('#grup_piket_id').val();
+            var grupPiket = $('#grup_piket').val();
+            var ketuaKelompok = $('#ketua_kelompok').val();
+            var ketuaKelompokid = $('#ketua_kelompok_id').val();
+            var namaHari = $('#nama_hari').val();
+            var idHari = $('#id_hari').val();
+            var jumlahAnggota = $('#jumlah').val();
 
+            
         
-    
-        $('#simpanDataBtn').on('click', function() {
-            // Create an array to store the data
-            var dataToSend = [];
-    
-            // Iterate over each row in the table
-            $('#tableList tbody tr').each(function() {
-                // Get values from the current row
-                var idAnggota = $(this).find('[name="id_anggota[]"]').text().trim();
-                var namaAnggota = $(this).find('[name="nama_anggota[]"]').text().trim();
-                var jabatan = $(this).find('[name="jabatan[]"]').text().trim();
-                var statusPiket = $(this).find('[name="status_piket[]"]').val();
-                var keterangan = $(this).find('[name="keterangan[]"]').val();
-    
-                // Create an object with the row data
-                var rowData = {
-                    id_anggota: idAnggota,
-                    nama_anggota: namaAnggota,
-                    jabatan: jabatan,
-                    status_piket: statusPiket,
-                    keterangan: keterangan
-                };
-    
-                // Push the object to the array
-                dataToSend.push(rowData);
-            });
-    
-            // Send the data to the controller using AJAX
-            $.ajax({
-                type: 'POST',
-                url: '{{ route("absensi_piket.store") }}',
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    dataToSend: dataToSend,
-                    grup_piket: grupPiket,
-                    grup_piket_id: grupPiketId,
-                    ketua_kelompok_id: ketuaKelompokid,
-                    ketua_kelompok: ketuaKelompok,
-                    nama_hari: namaHari,
-                    id_hari: idHari,
-                    jumlah_anggota: jumlahAnggota
-                },
-                success: response => {
-                    if (response.code == 200) {
-                        Swal.fire({
-                            title: 'Absensi Berhasil',
-                            text: `${response.message}`,
-                            icon: 'success',
-                            timer: 1000,
-                            willClose: () => {
-                                // Mengarahkan ke route jadwal.index
-                                window.location.href = '{{ route('absensi_piket.index') }}';
-                            }
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: `${response.message}`,
-                            showConfirmButton: false,
-                            timer: 1500,
-                            willClose: () => {
-                                location.reload();
-                            }
-                        });
-                    }
-                },
-                error: (err) => {
-                    console.log(err);
-                },
+            $('#simpanDataBtn').on('click', function() {
+               
+                var dataToSend = [];
+        
+                $('#tableList tbody tr').each(function() {
+                   
+                    var idAnggota = $(this).find('[name="id_anggota[]"]').text().trim();
+                    var namaAnggota = $(this).find('[name="nama_anggota[]"]').text().trim();
+                    var jabatan = $(this).find('[name="jabatan[]"]').text().trim();
+                    var statusPiket = $(this).find('[name="status_piket[]"]').val();
+                    var keterangan = $(this).find('[name="keterangan[]"]').val();
+        
+                   
+                    var rowData = {
+                        id_anggota: idAnggota,
+                        nama_anggota: namaAnggota,
+                        jabatan: jabatan,
+                        status_piket: statusPiket,
+                        keterangan: keterangan
+                    };
+        
+                    dataToSend.push(rowData);
+                });
+
+                var isStatusPiketNull = dataToSend.some(function(row) {
+                        return row.status_piket === null || row.status_piket === undefined || row.status_piket === '';
+                });
+
+                if (isStatusPiketNull) {
+                    
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Isi Dulu Status Piket',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    return; 
+                }
+        
+               
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("absensi_piket.store") }}',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        dataToSend: dataToSend,
+                        grup_piket: grupPiket,
+                        grup_piket_id: grupPiketId,
+                        ketua_kelompok_id: ketuaKelompokid,
+                        ketua_kelompok: ketuaKelompok,
+                        nama_hari: namaHari,
+                        id_hari: idHari,
+                        jumlah_anggota: jumlahAnggota
+                    },
+                    success: response => {
+                        if (response.code == 200) {
+                            Swal.fire({
+                                title: 'Absensi Berhasil',
+                                text: `${response.message}`,
+                                icon: 'success',
+                                timer: 1000,
+                                willClose: () => {
+                                    // Mengarahkan ke route jadwal.index
+                                    window.location.href = '{{ route('absensi_piket.index') }}';
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: `${response.message}`,
+                                showConfirmButton: false,
+                                timer: 1500,
+                                willClose: () => {
+                                    location.reload();
+                                }
+                            });
+                        }
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    },
+                });
             });
         });
-    });
-    
     </script>
 @endsection
