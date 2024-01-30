@@ -34,7 +34,7 @@
                                             <label for="validationCustom02" class="form-label">Katua Kelompok
                                                 <code>*</code></label>
                                                 <input type="text" class="form-control" value="{{ $absen_kegiatan->ketua_kelompok }}" id="ketua_kelompok" name="ketua_kelompok" readonly>
-                                                <input type="text" class="form-control" value="{{ $absen_kegiatan->id_ketua }}" id="ketua_kelompok_id" name="ketua_kelompok_id" readonly>
+                                                <input type="text" class="form-control" value="{{ $absen_kegiatan->id_ketua }}" id="ketua_kelompok_id" name="ketua_kelompok_id" hidden>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -92,7 +92,7 @@
                                         
                                         <div class="row mt-4">
                                             <div class="col-sm-12">
-                                                <a href="{{ route('jadwal.index') }}"
+                                                <a href="{{ route('jadwal_piket.index') }}"
                                                     class="btn btn-secondary waves-effect">Batal</a>
                                                 <button class="btn btn-primary" type="button" style="float: right"
                                                     id="simpanDataBtn">Simpan</button>

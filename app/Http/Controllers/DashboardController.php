@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AbsensiPiketModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +14,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        
+        $hasilabsen = AbsensiPiketModel::all();
         $data = [
             'title' => $this->title,
             'menu' => $this->menu,
