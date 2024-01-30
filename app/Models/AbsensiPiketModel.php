@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TemporaryModel extends Model
+class AbsensiPiketModel extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'temporary_file';
-    protected $guarded = [];
+    protected $table ='table_absensi_piket';
+    protected $guarded =[];
+
 }

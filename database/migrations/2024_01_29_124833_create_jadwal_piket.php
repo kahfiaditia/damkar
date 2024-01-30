@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableJadwalHari extends Migration
+class CreateJadwalPiket extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateTableJadwalHari extends Migration
      */
     public function up()
     {
-        Schema::create('table_jadwal_hari', function (Blueprint $table) {
+        Schema::create('table_jadwal_piket', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_pembina');
-            $table->foreign('id_pembina')->references('id')->on('users');
-            $table->unsignedBigInteger('id_kegiatan');
-            $table->foreign('id_kegiatan')->references('id')->on('ekstrakurikuler');
+            $table->unsignedBigInteger('id_kelompok');
+            $table->foreign('id_kelompok')->references('id')->on('users');
+            $table->unsignedBigInteger('id_piket');
+            $table->foreign('id_piket')->references('id')->on('piket');
             $table->unsignedBigInteger('id_hari');
             $table->foreign('id_hari')->references('id')->on('table_hari');
-            $table->time('jam_mulai')->nullable();
-            $table->time('jam_selesai')->nullable();
             $table->string('status', 1)->nullable();
             $table->unsignedBigInteger('user_created')->nullable();
             $table->foreign('user_created')->references('id')->on('users');
@@ -42,6 +40,6 @@ class CreateTableJadwalHari extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_jadwal_hari');
+        Schema::dropIfExists('table_jadwal_piket');
     }
 }

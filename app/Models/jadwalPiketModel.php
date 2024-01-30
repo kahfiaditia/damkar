@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class HasilAbsensiModel extends Model
+class jadwalPiketModel extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'table_absensi_data';
-    protected $guarded = [];
+    protected $table ="table_jadwal_piket";
+    protected $guarded =[];
 }

@@ -102,7 +102,18 @@
                 var jabatan = $('#jabatan').val();
                 var piketId = $('#piket').val();
 
-                // Kirim data ke controller
+                if (!nama || !piketId) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Tanda * (bintang) wajib diisi',
+                        text: 'Isi Nama dan Piket',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    return;
+                }
+
+                // untuk Kirim data ke controller
                 $.ajax({
                     type: "POST",
                     url: '{{ route('anggota.store') }}',

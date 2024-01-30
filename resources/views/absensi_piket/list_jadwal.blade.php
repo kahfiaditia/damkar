@@ -34,9 +34,9 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width: 100px">#</th>
-                                        <th scope="col">Kegiatan</th>
-                                        <th scope="col">Pembina</th>
+                                        <th scope="col">Ketua Kelompok</th>
                                         <th scope="col">Hari</th>
+                                        <th scope="col">Grup Piket</th>
                                         <th scope="col">Mulai</th>
                                         <th scope="col">Akhir</th>
                                         <th scope="col">Action</th>
@@ -47,13 +47,13 @@
                                     @foreach ($list as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->nama_kegiatan }}</td>
-                                            <td>{{ $item->nama_pembina }}</td>
+                                            <td>{{ $item->ketua_kelompok }}</td>
                                             <td>{{ $item->nama_hari }}</td>
+                                            <td>{{ $item->kode }}</td>
                                             <td>{{ $item->jam_mulai }}</td>
                                             <td>{{ $item->jam_selesai }}</td>
                                             <td>
-                                                <a href="{{ route('daftar_absensi.edit', $item->id_kegiatan) }}"
+                                                <a href="{{ route('absensi_piket.edit', $item->id) }}"
                                                     class="text-warning" data-toggle="tooltip" data-placement="top"
                                                     title="Absensi">
                                                     <i class="mdi mdi-file-document-edit-outline font-size-18"></i>

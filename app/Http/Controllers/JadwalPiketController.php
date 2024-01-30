@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Helper\AlertHelper;
-use App\Models\ExtraModel;
 use App\Models\HariModel;
-use App\Models\JadwalKegiatanModel;
+use App\Models\jadwalPiketModel;
+use App\Models\PiketModel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
-class JadwalExtraController extends Controller
+class JadwalPiketController extends Controller
 {
-    protected $title = 'Ekstrakurikuler';
+    protected $title = 'Jadwal Piket';
     protected $menu = 'Jadwal';
     /**
      * Display a listing of the resource.
@@ -24,13 +24,30 @@ class JadwalExtraController extends Controller
      */
     public function index()
     {
+            $userdata = JadwalPiketModel::select(
+                'piket.id',
+                'piket.kode',
+                'table_hari.nama_hari',
+                'users.name',
+                'table_jadwal_piket.id_piket',
+                'table_jadwal_piket.status'
+            )
+            ->join('table_hari', 'table_jadwal_piket.id_hari', '=', 'table_hari.id')
+            ->join('piket', 'table_jadwal_piket.id_piket', '=', 'piket.id')
+            ->join('users', 'table_jadwal_piket.id_kelompok', '=', 'users.id')
+            ->whereNull('table_jadwal_piket.deleted_at')
+            ->get();
+            
+
         $data = [
             'title' => $this->title,
             'menu' => $this->menu,
             'label' => $this->menu,
-            'jadwal' => JadwalKegiatanModel::whereNull('deleted_at')->get(),
+            'jadwal' => $userdata
         ];
-        return view('jadwal.data')->with($data);
+
+        
+        return view('jadwal_piket.data')->with($data);
     }
 
     public function data_list_jadwal(Request $request)
@@ -113,24 +130,24 @@ class JadwalExtraController extends Controller
             'title' => $this->title,
             'menu' => $this->menu,
             'label' => $this->menu,
-            'kegiatan' => ExtraModel::whereNull('deleted_at')->get(),
-            'pembina' => User::where('roles', 'pembina')->get(),
+            'piket' => PiketModel::whereNull('deleted_at')->get(),
+            'ketua' => User::where('roles', 'Kelompok')->get(),
 
         ];
-        return view('jadwal.tambah')->with($data);
+        return view('jadwal_piket.tambah')->with($data);
     }
 
-    public function cari_pembina()
+    public function ketua_kelompok()
     {
-        $pembina = DB::table('users')
+        $kelompok = DB::table('users')
             ->whereNull('deleted_at')
-            ->where('roles', '=', "pembina")
+            ->where('roles', '=', "Kelompok")
             ->get();
 
-        if (count($pembina) > 0) {
+        if (count($kelompok) > 0) {
             return response()->json([
                 'code' => 200,
-                'data' => $pembina,
+                'data' => $kelompok,
             ]);
         } else {
             return response()->json([
@@ -152,9 +169,9 @@ class JadwalExtraController extends Controller
         return response()->json(['data' => $hariList]);
     }
 
-    public function simpan_data(Request $request)
+    public function simpan_data_piket(Request $request)
     {
-
+        // dd($request);
         DB::beginTransaction();
         try {
 
@@ -162,10 +179,11 @@ class JadwalExtraController extends Controller
 
             // Simpan data jadwal ke database
             foreach ($datajadwal as $data) {
-                JadwalKegiatanModel::create([
-                    'id_kegiatan' => $data['kegiatan'],
-                    'id_pembina' => $data['pembina'],
+                jadwalPiketModel::create([
+                    'id_kelompok' => $data['kelompok'],
+                    'id_piket' => $data['piket'],
                     'id_hari' => $data['nilaiSelect'],
+                    'status' => 1,
                     'jam_mulai' => $data['jam_mulai'],
                     'jam_selesai' => $data['jam_selesai'],
                     'user_created' => Auth::user()->id,
@@ -189,33 +207,6 @@ class JadwalExtraController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\JadwalKegiatanModel  $JadwalKegiatanModel
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\JadwalKegiatanModel  $JadwalKegiatanModel
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $dataedit = DB::table('table_jadwal_hari')
@@ -235,7 +226,7 @@ class JadwalExtraController extends Controller
             'jadwal' => $dataedit,
             'nama_harinya' => HariModel::all(),
         ];
-        return view('jadwal.edit')->with($data);
+        return view('jadwal_piket.edit')->with($data);
     }
 
     /**
@@ -253,7 +244,7 @@ class JadwalExtraController extends Controller
         try {
             // dd($request->hari);
 
-            $jadwal = JadwalKegiatanModel::findOrFail($id);
+            $jadwal = PiketModel::findOrFail($id);
             $jadwal->id_pembina = $request->pembina;
             $jadwal->id_kegiatan = $request->kegiatan;
             $jadwal->id_hari = $request->hari;
@@ -264,7 +255,7 @@ class JadwalExtraController extends Controller
 
             DB::commit();
             AlertHelper::addAlert(true);
-            return redirect('/jadwal');
+            return redirect('/jadwal_piket');
         } catch (\Throwable $err) {
             DB::rollback();
             throw $err;
@@ -283,7 +274,7 @@ class JadwalExtraController extends Controller
     {
         DB::beginTransaction();
         try {
-            $hapus = JadwalKegiatanModel::findorfail($id);
+            $hapus = PiketModel::findorfail($id);
             $hapus->user_deleted = Auth::user()->id;
             $hapus->deleted_at = Carbon::now();
             $hapus->save();

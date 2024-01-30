@@ -36,7 +36,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Kode Piket1</th>
+                                        <th>Kode Piket</th>
                                         <th>Deskripsi</th>
                                         <th>Status</th>
                                         <th>Aksi</th>

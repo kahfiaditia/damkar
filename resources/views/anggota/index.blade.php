@@ -28,7 +28,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="accordion" id="accordionExample">
+                            {{-- <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
                                         <button class="accordion-button fw-medium <?php if (isset($_GET['name'])) {
@@ -151,7 +151,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <br>
                             <table id="datatable" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
@@ -276,8 +276,8 @@
                         name: 'jabatan'
                     },
                     {
-                        data: 'piket',
-                        name: 'piket'
+                        data: 'kode',
+                        name: 'kode'
                     },
                    
                     {

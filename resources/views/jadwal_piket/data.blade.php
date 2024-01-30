@@ -16,7 +16,7 @@
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
 
-                                        <a href="{{ route('kegiatan.create') }}" type="button"
+                                        <a href="{{ route('jadwal_piket.create') }}" type="button"
                                             class="float-end btn btn-success btn-rounded waves-effect waves-light mb-2 me-2">
                                             <i class="mdi mdi-plus me-1"></i> Tambah
                                         </a>
@@ -36,21 +36,21 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Kode</th>
-                                        <th>Nama</th>
-                                        <th>Deskripsi</th>
+                                        <th>Grup Piket</th>
+                                        <th>Ketua kelompok</th>
+                                        <th>Hari</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- {{ dd($kegiatan) }} --}}
-                                    @foreach ($kegiatan as $item)
+                                   {{-- {{ dd($jadwal);}} --}}
+                                    @foreach ($jadwal as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->kode }}</td>
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ $item->deskripsi }}</td>
+                                            <td>{{ $item->nama_hari }}</td>
                                             <td>
                                                 @if ($item->status == 1)
                                                     <span class="badge bg-success">Active</span>
@@ -66,7 +66,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <div class="d-flex gap-3">
-                                                        <a href="{{ route('kegiatan.edit', $id) }}" class="text-success">
+                                                        <a href="{{ route('piket.edit', $id) }}" class="text-success">
                                                             <i class="mdi mdi-pencil font-size-18"></i>
                                                         </a>
                                                         <a href class="text-danger delete_confirm"><i

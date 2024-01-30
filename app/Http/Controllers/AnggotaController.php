@@ -32,9 +32,17 @@ class AnggotaController extends Controller
 
     public function list_data_anggota(Request $request)
     {
-        $userdata = DB::table('table_anggota')
+        $userdata = AnggotaModel::select(
+            'piket.id',
+            'piket.kode',
+            'table_anggota.nama',
+            'table_anggota.jabatan',
+            'table_anggota.piket'
+        )
+            ->join('piket', 'table_anggota.piket', '=', 'piket.id')
             ->whereNull('table_anggota.deleted_at');
-            // ->orderBy('table_anggota.id', 'DESC');
+
+        
 
         if ($request->get('search_manual') != null) {
             $search = $request->get('search_manual');
