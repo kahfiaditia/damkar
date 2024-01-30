@@ -32,7 +32,7 @@ class AkunSeeder extends Seeder
                 'email_verified_at' => Carbon::now(),
             ],
             [
-                'name' => 'Imin Mahfud Gibran',
+                'name' => 'Imin Gibran Magfud',
                 'email' => 'kelompok@gmail.com',
                 'password' => bcrypt('12345'),
                 'roles' => 'Kelompok',
@@ -40,6 +40,17 @@ class AkunSeeder extends Seeder
                 'pin' => 1234,
                 'address' => 'Jalan Hutan Kayu',
                 'phone' => '0896566644',
+                'email_verified_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Anis Prabowo Ganjar',
+                'email' => 'kelompok2@gmail.com',
+                'password' => bcrypt('12345'),
+                'roles' => 'Kelompok',
+                'nis' => '895658988',
+                'pin' => 1234,
+                'address' => 'Jalan Hutan Kayu',
+                'phone' => '089656786',
                 'email_verified_at' => Carbon::now(),
             ],
             [
