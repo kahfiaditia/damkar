@@ -184,8 +184,6 @@ class JadwalPiketController extends Controller
                     'id_piket' => $data['piket'],
                     'id_hari' => $data['nilaiSelect'],
                     'status' => 1,
-                    'jam_mulai' => $data['jam_mulai'],
-                    'jam_selesai' => $data['jam_selesai'],
                     'user_created' => Auth::user()->id,
                     'created_at' => Carbon::now(),
                 ]);
@@ -289,6 +287,6 @@ class JadwalPiketController extends Controller
         }
     }
 
-    
+
    
 }
