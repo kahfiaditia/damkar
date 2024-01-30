@@ -49,11 +49,11 @@ class AnggotaController extends Controller
             // $search_rak = str_replace(' ', '', $search);
             $userdata->where(function ($where) use ($search) {
                 $where
-                    ->orWhere('name', 'like', '%' . $search . '%')
-                    ->orWhere('email', 'like', '%' . $search . '%')
-                    ->orWhere('nik', 'like', '%' . $search . '%')
-                    ->orWhere('roles', 'like', '%' . $search . '%');
-                // ->orWhere('id_supplier', 'like', '%' . $search . '%');
+                    ->orWhere('nama', 'like', '%' . $search . '%')
+                    ->orWhere('jabatan', 'like', '%' . $search . '%')
+                    ->orWhere('status', 'like', '%' . $search . '%')
+                    ->orWhere('piket', 'like', '%' . $search . '%');
+                
             });
 
             $search = $request->get('search');
@@ -61,25 +61,29 @@ class AnggotaController extends Controller
             if ($search != null) {
                 $userdata->where(function ($where) use ($search) {
                     $where
-                        ->orWhere('name', 'like', '%' . $search . '%')
-                        ->orWhere('email', 'like', '%' . $search . '%')
-                        ->orWhere('nik', 'like', '%' . $search . '%')
-                        ->orWhere('roles', 'like', '%' . $search . '%');
-                    // ->orWhere('id_supplier', 'like', '%' . $search . '%');
+                        ->orWhere('nama', 'like', '%' . $search . '%')
+                        ->orWhere('jabatan', 'like', '%' . $search . '%')
+                        ->orWhere('status', 'like', '%' . $search . '%')
+                        ->orWhere('piket', 'like', '%' . $search . '%');
+                   
                 });
             }
         } else {
-            if ($request->get('name') != null) {
-                $name = $request->get('name');
-                $userdata->where('name', '=', $name);
+            if ($request->get('nama') != null) {
+                $nama = $request->get('nama');
+                $userdata->where('nama', '=', $nama);
             }
-            if ($request->get('email') != null) {
-                $email = $request->get('email');
-                $userdata->where('email', '=', $email);
+            if ($request->get('jabatan') != null) {
+                $jabatan = $request->get('jabatan');
+                $userdata->where('jabatan', '=', $jabatan);
             }
-            if ($request->get('name') != null) {
-                $name = $request->get('name');
-                $userdata->where('name', '=', $name);
+            if ($request->get('status') != null) {
+                $status = $request->get('status');
+                $userdata->where('status', '=', $status);
+            }
+            if ($request->get('piket') != null) {
+                $piket = $request->get('piket');
+                $userdata->where('piket', '=', $piket);
             }
         }
 

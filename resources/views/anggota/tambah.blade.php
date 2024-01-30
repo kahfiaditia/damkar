@@ -26,7 +26,7 @@
                                         <label for="validationCustom02" class="form-label">Nama
                                             <code>*</code></label>
                                         <input type="text" class="form-control" id="nama" name="nama"
-                                            maxlength="25" onkeyup="this.value = this.value.toUpperCase();" required>
+                                            maxlength="25" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" required>
                                         <div class="invalid-feedback">
                                             Data wajib diisi.
                                         </div>

@@ -28,10 +28,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            {{-- <div class="accordion" id="accordionExample">
+                            <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
-                                        <button class="accordion-button fw-medium <?php if (isset($_GET['name'])) {
+                                        <button class="accordion-button fw-medium <?php if (isset($_GET['nama'])) {
                                         } else {
                                             echo 'collapsed';
                                         } ?>" type="button"
@@ -43,8 +43,8 @@
                                     </h2>
 
                                     <div id="collapseOne" class="accordion-collapse collapse <?php
-                                    if (isset($_GET['name']) or isset($_GET['email']) or isset($_GET['nis']) or isset($_GET['address']) or isset($_GET['phone']) or isset($_GET['roles'])) {
-                                        if ($_GET['name'] != null or $_GET['email'] != null or $_GET['nis'] != null or $_GET['address'] != null or $_GET['phone'] != null or $_GET['roles'] != null) {
+                                    if (isset($_GET['nama']) or isset($_GET['jabatan']) or isset($_GET['status']) or isset($_GET['piket'])) {
+                                        if ($_GET['nama'] != null or $_GET['jabatan'] != null or $_GET['status'] != null or $_GET['piket'] != null) {
                                             echo 'show';
                                         }
                                     }
@@ -61,40 +61,27 @@
                                                         <div class="col-md-12">
                                                             <div class="row">
                                                                 <div class="col-md-2 mb-2">
-                                                                    <input type="text" name="name" id="name"
-                                                                        value="{{ isset($_GET['name']) ? $_GET['name'] : null }}"
+                                                                    <input type="text" name="nama" id="nama"
+                                                                        value="{{ isset($_GET['nama']) ? $_GET['nama'] : null }}"
                                                                         class="form-control" placeholder="Nama"
                                                                         autocomplete="off">
                                                                 </div>
                                                                 <div class="col-sm-2 mb-2">
-                                                                    <input type="text" name="email" id="email"
-                                                                        value="{{ isset($_GET['email']) ? $_GET['email'] : null }}"
-                                                                        class="form-control" placeholder="Email"
+                                                                    <input type="text" name="jabatan" id="jabatan"
+                                                                        value="{{ isset($_GET['jabatan']) ? $_GET['jabatan'] : null }}"
+                                                                        class="form-control" placeholder="Jabatan"
                                                                         autocomplete="off">
                                                                 </div>
                                                                 <div class="col-sm-2 mb-2">
-                                                                    <input type="text" name="nis" id="nis"
-                                                                        value="{{ isset($_GET['nis']) ? $_GET['nis'] : null }}"
-                                                                        class="form-control" placeholder="Nis"
+                                                                    <input type="text" name="status" id="status"
+                                                                        value="{{ isset($_GET['status']) ? $_GET['status'] : null }}"
+                                                                        class="form-control" placeholder="Status"
                                                                         autocomplete="off">
                                                                 </div>
                                                                 <div class="col-sm-2 mb-2">
-                                                                    <input type="text" name="address" id="address"
-                                                                        value="{{ isset($_GET['address']) ? $_GET['address'] : null }}"
-                                                                        class="form-control" placeholder="Alamat"
-                                                                        autocomplete="off">
-                                                                </div>
-                                                                <div class="col-sm-2 mb-2">
-                                                                    <input type="text" name="phone" id="phone"
-                                                                        value="{{ isset($_GET['phone']) ? $_GET['phone'] : null }}"
-                                                                        class="form-control" placeholder="Phone"
-                                                                        autocomplete="off">
-                                                                </div>
-
-                                                                <div class="col-sm-2 mb-2">
-                                                                    <input type="text" name="roles" id="roles"
-                                                                        value="{{ isset($_GET['roles']) ? $_GET['roles'] : null }}"
-                                                                        class="form-control" placeholder="Roles"
+                                                                    <input type="text" name="piket" id="piket"
+                                                                        value="{{ isset($_GET['piket']) ? $_GET['piket'] : null }}"
+                                                                        class="form-control" placeholder="piket"
                                                                         autocomplete="off">
                                                                 </div>
                                                             </div>
@@ -125,17 +112,14 @@
                                                         <div class="col-sm-10 mb-2">
                                                             <button type="submit"
                                                                 class="btn btn-primary w-md">Cari</button>
-                                                            <a href="{{ route('pembina.index') }}"
+                                                            <a href="{{ route('anggota.index') }}"
                                                                 class="btn btn-secondary w-md">Batal</a>
-                                                            @if (isset($_GET['name']) or isset($_GET['like']))
+                                                            @if (isset($_GET['nama']) or isset($_GET['like']))
                                                                 <?php
-                                                                $name = $_GET['name'];
-                                                                $email = $_GET['email'];
-                                                                $nis = $_GET['nis'];
-                                                                $address = $_GET['address'];
-                                                                $phone = $_GET['phone'];
-                                                                $roles = $_GET['roles'];
-                                                                // $name = $_GET['name'];
+                                                                $nama = $_GET['nama'];
+                                                                $jabatan = $_GET['jabatan'];
+                                                                $status = $_GET['status'];
+                                                                $piket = $_GET['piket'];
                                                                 $search_manual = $_GET['search_manual'];
                                                                 if (isset($_GET['like'])) {
                                                                     $like = $_GET['like'];
@@ -151,7 +135,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                             <br>
                             <table id="datatable" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
@@ -178,13 +162,10 @@
         function toggleCheckbox() {
             like = document.getElementById("like").checked;
             if (like == true) {
-                document.getElementById("name").value = null;
-                document.getElementById("email").value = null;
-                document.getElementById("nis").value = null;
-                document.getElementById("address").value = null;
-                document.getElementById("phone").value = null;
-                document.getElementById("roles").value = null;
-                // document.getElementById("name").value = null;
+                document.getElementById("nama").value = null;
+                document.getElementById("jabatan").value = null;
+                document.getElementById("status").value = null;
+                document.getElementById("piket").value = null;
                 $('#type').val("").trigger('change')
                 document.getElementById("id_where").style.display = 'none';
                 document.getElementById("id_like").style.display = 'block';
@@ -199,12 +180,10 @@
         $(document).ready(function() {
             like = document.getElementById("like").checked;
             if (like == true) {
-                document.getElementById("name").value = null;
-                document.getElementById("email").value = null;
-                document.getElementById("nis").value = null;
-                document.getElementById("address").value = null;
-                document.getElementById("phone").value = null;
-                document.getElementById("roles").value = null;
+                document.getElementById("nama").value = null;
+                document.getElementById("jabatan").value = null;
+                document.getElementById("status").value = null;
+                document.getElementById("piket").value = null;
                 $('#type').val("").trigger('change')
                 document.getElementById("id_where").style.display = 'none';
                 document.getElementById("id_like").style.display = 'block';
@@ -225,31 +204,23 @@
                 ajax: {
                     url: "{{ route('anggota.list_data_anggota') }}",
                     data: function(d) {
-                        d.name = (document.getElementById("name").value
+                        d.nama = (document.getElementById("nama").value
                                 .length != 0) ?
                             document
                             .getElementById(
-                                "name").value : null;
-                        d.email = (document.getElementById("email").value.length != 0) ?
+                                "nama").value : null;
+                        d.jabatan = (document.getElementById("jabatan").value.length != 0) ?
                             document
                             .getElementById(
-                                "email").value : null;
-                        d.nis = (document.getElementById("nis").value.length != 0) ?
+                                "jabatan").value : null;
+                        d.status = (document.getElementById("status").value.length != 0) ?
                             document
                             .getElementById(
-                                "nis").value : null;
-                        d.address = (document.getElementById("address").value.length != 0) ?
+                                "status").value : null;
+                        d.piket = (document.getElementById("piket").value.length != 0) ?
                             document
                             .getElementById(
-                                "address").value : null;
-                        d.phone = (document.getElementById("phone").value.length != 0) ?
-                            document
-                            .getElementById(
-                                "phone").value : null;
-                        d.roles = (document.getElementById("roles").value.length != 0) ?
-                            document
-                            .getElementById(
-                                "roles").value : null;
+                                "piket").value : null;
                         d.search_manual = (document.getElementById("search_manual").value
                                 .length != 0) ?
                             document
