@@ -38,8 +38,6 @@
                                         <th scope="col">Ketua Kelompok</th>
                                         <th scope="col">Hari</th>
                                         <th scope="col">Grup Piket</th>
-                                        <th scope="col">Mulai</th>
-                                        <th scope="col">Akhir</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -51,8 +49,6 @@
                                             <td>{{ $item->ketua_kelompok }}</td>
                                             <td>{{ $item->nama_hari }}</td>
                                             <td>{{ $item->kode }}</td>
-                                            <td>{{ $item->jam_mulai }}</td>
-                                            <td>{{ $item->jam_selesai }}</td>
                                             <td>
                                                 <a href="{{ route('absensi_piket.edit', $item->id) }}"
                                                     class="text-warning" data-toggle="tooltip" data-placement="top"
